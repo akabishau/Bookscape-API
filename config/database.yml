@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+  username: <%= ENV["BOOKSCAPE_DATABASE_USERNAME"] %>
+  password: <%= ENV["BOOKSCAPE_DATABASE_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: bookscape_api_development
+
+test:
+  <<: *default
+  database: bookscape_api_test
+
+
+production:
+  <<: *default
+  database: bookscape_api_production
+  url: <%= ENV["DATABASE_URL"] %>
